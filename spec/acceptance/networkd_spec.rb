@@ -51,6 +51,7 @@ describe 'systemd with manage_networkd true' do
 
     it 'works idempotently with no errors' do
       apply_manifest(manifest, catch_failures: true)
+      pending('systemd-networkd cannot be reliably stopped on Archlinux in a container') if fact('os.name') == 'Archlinux'
       apply_manifest(manifest, catch_changes: true)
     end
 
